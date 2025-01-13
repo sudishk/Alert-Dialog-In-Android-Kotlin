@@ -22,30 +22,22 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val logOutButton = findViewById<Button>(R.id.addUserButton)
+        val logOutButton = findViewById<Button>(R.id.logoutButton)
         logOutButton.setOnClickListener {
 
-            val layout = LayoutInflater.from(this).inflate(R.layout.custom_dialog_design, null)
 
-            val alertDialog = AlertDialog.Builder(this).create()
-            alertDialog.setView(layout)
+            val alertDialog = AlertDialog.Builder(this)
+            alertDialog.setTitle("Log Out!")
+            alertDialog.setMessage("Are you sure you want to logOut?")
+            alertDialog.setPositiveButton("Yes"){_,_ ->
+                Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
+            }
+
+            alertDialog.setNegativeButton("No"){_,_ ->
+                Toast.makeText(this, "Logout cancel", Toast.LENGTH_SHORT).show()
+
+            }
             alertDialog.show()
-
-            val cancel= layout.findViewById<Button>(R.id.cancelBtn)
-            val save= layout.findViewById<Button>(R.id.saveBtn)
-            val nameEditText= layout.findViewById<EditText>(R.id.nameEditText)
-            val emailEditText= layout.findViewById<EditText>(R.id.emailEditText)
-
-            cancel.setOnClickListener {
-                alertDialog.dismiss()
-            }
-
-            save.setOnClickListener {
-                val description = nameEditText.text.toString()+" " + emailEditText.text.toString()
-                val description1 = "Name is ${nameEditText.text} and email is ${emailEditText.text}"
-                Toast.makeText(this, description1, Toast.LENGTH_SHORT).show()
-                alertDialog.dismiss()
-            }
         }
     }
 }
